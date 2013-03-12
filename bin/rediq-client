@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'rediq/client'
+
+options = { :redis_host => '127.0.0.1', :redis_port => 6379 }
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: rediq-client [--host redis_host] [--port redis_port] [--job job_hash]'
+
+  opts.on('-h', '--host [HOST]', String, 'Specify redis host') do |h|
+
+  end
+
+  opts.on('-p', '--port [PORT]', Integer, 'Specify redis port') do |p|
+
+  end
+
+end.parse!
+
+puts 'RediQ client does NOT support any command now!'
+
+
+
+
+
+
+
+
