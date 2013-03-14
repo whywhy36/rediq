@@ -1,3 +1,5 @@
+require 'json'
+
 module Rediq
   class ScriptRunner
     attr_accessor :path, :logger
@@ -16,13 +18,14 @@ module Rediq
 
     def extract_job_info(job)
       job_name   = job['job_name']
-      job_params = job['job_params']
+      job_params = job['params']
       [job_name, job_params]
     end
 
     def run_script_with_params(script, script_params)
-      logger.debug script
-      ret = system("#{script}")
+      command = "#{script} '#{script_params.to_json}' "
+      logger.debug "run command : #{command}"
+      ret = system(command)
       {:ret => ret, :error_status => $?}
     end
   end
