@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     lib/rediq/group/script_runner.rb
     lib/rediq/group/const.rb
     lib/rediq/ext/redis_helper.rb
+    lib/rediq/ext/env_checker.rb
     rediq.yml
   ]
 

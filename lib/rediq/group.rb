@@ -46,11 +46,13 @@ module Rediq
 
     def do_init(config, opts)
       @options = opts
+      @current_worker_num = 0
       set_up_trap
       set_up_logger
-      @current_worker_num = 0
-      @max_worker_num = 4
-      @dispatcher = Rediq::Dispatcher.new(config, logger)
+      Rediq::EnvChecker.init
+      @max_worker_num = Rediq::EnvChecker.processor_count || 3
+      @logger.debug "Max Worker Number set to #{@max_worker_num}"
+      @dispatcher = Rediq::Dispatcher.new(config)
     end
 
     def set_up_trap
