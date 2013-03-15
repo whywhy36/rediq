@@ -17,6 +17,7 @@ module Rediq
       @queue = Rediq::REDIQ_QUEUE
       @pending = Rediq::REDIQ_PENDING
       @logger = Rediq.logger
+      yield self if block_given?
     end
 
     def dispatch
@@ -27,7 +28,7 @@ module Rediq
         unless job.nil?
           Rediq.current_worker_num += 1
           fork do
-            s_runner = ScriptRunner.new(config['script'])
+            s_runner = ScriptRunner.new(config['script'], logger)
             worker = Worker.new(s_runner) do |me|
                logger.debug 'worker started ...'
             end

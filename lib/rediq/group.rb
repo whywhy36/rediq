@@ -50,7 +50,7 @@ module Rediq
       set_up_logger
       @current_worker_num = 0
       @max_worker_num = 4
-      @dispatcher = Rediq::Dispatcher.new(config)
+      @dispatcher = Rediq::Dispatcher.new(config, logger)
     end
 
     def set_up_trap

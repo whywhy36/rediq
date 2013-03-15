@@ -1,6 +1,13 @@
 # RediQ
 
-RediQ is one generic batch job processor based on Redis.
+## What is RediQ
+
+RediQ is one generic batch job processor based on Redis. You can easily integrate Rediq into your own application.
+Any executable script compatible with *nix can be scheduled by RediQ, you just focus on application logic or batch job
+logic without worrying about the resource exhausted due to unscheduled job. Suppose you are developing one web
+application and you want this app can run some job background, you can use the language-specific framework (like resque
+in Ruby) to achieve the purpose. Using Rediq, just split up the batch task, write it in your favorite or most suitable
+language, and then, leave it to RediQ.
 
 ## Getting Started
 
@@ -9,6 +16,11 @@ build & install
 ```bash
 [sudo] gem build rediq.gemspec
 [sudo] gem install rediq-X.X.X.gem
+```
+
+or use Gemfile
+```ruby
+gem 'redis', :github => 'whywhy36/rediq'
 ```
 
 ## Basic Usage
@@ -40,12 +52,6 @@ In your Ruby code, create one rediq client
 
 ```ruby
 rediq = Rediq.client.new(redis) # redis is one Redis client
-```
-or
-```ruby
-rediq = Rediq.client.new do |rediq|
-  rediq.redis = redis
-end
 ```
 
 then we can use this client to create new job

@@ -4,9 +4,10 @@ module Rediq
   class ScriptRunner
     attr_accessor :path, :logger
 
-    def initialize(config)
+    def initialize(config, logger)
       @path = config['loadpath']
-      @logger = Rediq.logger
+      @logger = logger
+      yield self if block_given?
     end
 
     def handle(job)

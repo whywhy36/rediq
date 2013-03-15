@@ -9,7 +9,7 @@ module Rediq
 
     attr_accessor :redis, :queue
 
-    def initialize(redis)
+    def initialize(redis=nil)
       @redis = redis
       @queue = Rediq::REDIQ_QUEUE
       yield self if block_given?
